@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+        function drop(event) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("text");
+            var draggedElement = document.getElementById(data);
+            event.target.appendChild(draggedElement);
+        }
+    </script>
+    <style>
+        .container {
+            display: inline-block;
+            margin: 10px;
+        }
+        
+        img {
+            width: 100px;
+            height: 100px;
+        }
+
+        #dropzone {
+            width: 200px;
+            height: 200px;
+            border: 2px dashed #ccc;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img id="image1" src="twitter.jpg" draggable="true" ondragstart="drag(event)" alt="">
+        <img id="image2" src="logo.png" draggable="true" ondragstart="drag(event)" alt="">
+    </div>
+    <div class="container">
+        <div id="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    </div>
+    
+</body>
+</html>
